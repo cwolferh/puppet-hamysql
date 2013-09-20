@@ -37,7 +37,7 @@ class hamysql::node (
 
     class {'pacemaker::corosync':
         cluster_name => "hamysql", 
-        cluster_members => "192.168.200.2 192.168.200.3 192.168.200.4 ", }
+        cluster_members => "192.168.200.2 192.168.200.3 192.168.200.4 ",
         require => Class['openstack::db::mysql'], Yumrepo['clusterlabs'],
     }
 
