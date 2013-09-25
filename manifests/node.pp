@@ -10,12 +10,16 @@ class hamysql::node (
         baseurl => "http://clusterlabs.org/64z.repo",
         enabled => 1,
         priority => 1,
+        gpgcheck => 0, # since the packages (eg pcs) don't appear to be signed
     }
 
     package { 'MySQL-python' :
        ensure => installed,
     }
     package { 'mysql-server' :
+       ensure => installed,
+    }
+    package { 'ccs' :
        ensure => installed,
     }
 
@@ -45,7 +49,7 @@ class hamysql::node (
     class {'pacemaker::corosync':
         cluster_name => "hamysql", 
         cluster_members => "192.168.200.11 192.168.200.12 192.168.200.13 ",
-        require => [Yumrepo['clusterlabs'],Package['mysql-server'],Package['MySQL-python']],
+        require => [Yumrepo['clusterlabs'],Package['mysql-server'],Package['MySQL-python'],Package['ccs']],
     }
 
     class {"pacemaker::resource::ip":
