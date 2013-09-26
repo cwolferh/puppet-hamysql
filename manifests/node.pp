@@ -61,8 +61,10 @@ class hamysql::node (
        device => "192.168.200.200:/mnt/mysql",
        directory => "/var/lib/mysql",
        fstype => "nfs",
+       group => "my_group",
     }
     class {"pacemaker::resource::lsb":
        name => "mysql",
+       group => "my_group",
     }
 }
